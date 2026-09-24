@@ -1,3 +1,5 @@
+> **Versione precedente del pannello LED.** Le sezioni sul server web, sui sottoprocessi e sullo stato del browser sono superate dall’estensione LoRa. Per l’architettura corrente consultare [LORA.md](LORA.md). Il tool CLI descritto resta disponibile separatamente.
+
 # Idefix Touch — spiegazione del codice
 
 `idefix-touch` è un’applicazione locale composta da una pagina nel browser,

@@ -1,8 +1,8 @@
 # Idefix Touch
 
-Pannello touchscreen per i LED di ObelICS. Configurazione: Raspberry Pi con
+Pannello touchscreen per i LED di ObelICS e i grafici RSSI/SNR della LoRa. Configurazione: Raspberry Pi con
 Trixie, utente `pi`, applicazione in `/home/pi/idefix-touch`.
-Per il funzionamento del codice vedere [SPIEGAZIONE_CODICE.md](SPIEGAZIONE_CODICE.md).
+Per installazione dell’estensione, architettura aggiornata e anteprima senza schede vedere [LORA.md](LORA.md).
 
 ## Avvio su un Idefix già configurato
 
@@ -24,7 +24,7 @@ non ha Internet, mantenere la connessione. Via Ethernet usare
 
 L’installer abilita l’ascolto su tutte le interfacce con `--web-bind 0.0.0.0`:
 ogni dispositivo che raggiunge la pagina può comandare i LED. Il touchscreen
-continua a funzionare; selezione e ultimo ACK sono indipendenti in ogni browser.
+continua a funzionare; stato LED e raccolta LoRa sono condivisi fra i browser.
 
 ## Prima installazione
 

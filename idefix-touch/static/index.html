@@ -5,71 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="idefix-token" content="__TOKEN__">
 <link rel="icon" href="data:,">
-<title>Idefix · Controllo ObelICS</title>
-<style>
-:root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif;background:#101814;color:#eef5e7}
-*{box-sizing:border-box}body{margin:0;min-height:100vh}main{max-width:1100px;margin:auto;padding:24px 32px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}.brand{font-size:12px;font-weight:750;letter-spacing:.17em;color:#b7c8af}.brand b{color:#d0ed80}h1{font-size:clamp(25px,4vw,38px);letter-spacing:-.04em;margin:8px 0 0}.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}button{font:inherit;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}button.mode{position:relative;border:1px solid #40503a;background:#1b281f;color:inherit;text-align:left;border-radius:18px;padding:20px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;transition:background .15s,transform .1s}.mode:active{transform:scale(.98)}.mode:focus-visible{outline:3px solid #edfbb4;outline-offset:3px}.mode.selected{background:#d0ed80;border-color:#d0ed80;color:#14210f}.mode:disabled{opacity:.58;cursor:wait}.mode .name{font-size:23px;letter-spacing:-.03em;font-weight:650}.mode .description{display:block;font-size:12px;margin-top:5px;opacity:.75}.mode svg{width:65px;height:65px;stroke:currentColor;stroke-width:2.7;fill:none}.mode .number{position:absolute;right:16px;top:16px;font-size:11px;opacity:.5}.feedback{margin-top:18px;border:1px solid #40503a;border-radius:16px;padding:16px 20px;display:flex;gap:14px;align-items:center;min-height:85px}.status-icon{width:36px;height:36px;border-radius:50%;background:#2e3d2b;display:grid;place-items:center;font-size:19px;flex-shrink:0}.feedback[data-state=success] .status-icon{background:#d0ed80;color:#14210f}.feedback[data-state=error] .status-icon{background:#f0ba92;color:#38200e}.feedback[data-state=pending] .status-icon{animation:pulse 1s infinite}.feedback strong{font-size:15px;display:block}.feedback p{font-size:12px;color:#b7c8af;margin:5px 0 0;line-height:1.45}footer{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#a4b89b;margin-top:15px}details{margin-top:15px;color:#a4b89b;font-size:12px}summary{cursor:pointer;padding:8px 0;min-height:35px}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;background:#0c120e;border-radius:8px;font-size:11px}.hint{color:#a4b89b;font-size:13px;margin:0 0 14px}@keyframes pulse{50%{opacity:.3}}@media(max-width:650px){main{padding:20px}.controls{grid-template-columns:repeat(2,1fr)}button.mode{min-height:155px}header{align-items:flex-start}.mode svg{width:45px;height:45px}footer{flex-direction:column}}@media(max-height:520px) and (min-width:651px){main{padding:16px 22px}header{margin-bottom:14px}button.mode{min-height:160px;padding:16px}.feedback{margin-top:14px;min-height:75px;padding:12px 16px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+<link rel="stylesheet" href="/static/panel.css">
+<title>Idefix · ObelICS</title>
 </head>
 <body>
 <main>
-<header><div><div class="brand"><b>IDEFIX</b> / ObelICS</div><h1>Controllo led ObelICS</h1></div></header>
-<p class="hint">Scegli un effetto e osserva ObelICS.</p>
-<section class="controls" aria-label="Comandi LED">
-<button class="mode" data-mode="bounce" aria-pressed="false"><span class="number">01</span><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 32h44M19 23l-9 9 9 9M45 23l9 9-9 9"/><circle cx="32" cy="32" r="7" fill="currentColor" stroke="none"/></svg><span class="name">Bounce<span class="description">Luce avanti e indietro</span></span></button>
-<button class="mode" data-mode="spin" aria-pressed="false"><span class="number">02</span><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M48 20a21 21 0 1 0 5 22M48 9v13H35"/><circle cx="32" cy="32" r="4" fill="currentColor" stroke="none"/></svg><span class="name">Spin<span class="description">Luce in rotazione</span></span></button>
-<button class="mode" data-mode="blink" aria-pressed="false"><span class="number">03</span><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="10"/><path d="M32 5v9M32 50v9M5 32h9M50 32h9M13 13l6 6M45 45l6 6M13 51l6-6M45 19l6-6"/></svg><span class="name">Blink<span class="description">Lampeggio dei LED</span></span></button>
-<button class="mode" data-mode="off" aria-pressed="false"><span class="number">04</span><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6v24M20 15a22 22 0 1 0 24 0"/></svg><span class="name">Spegni<span class="description">Spegni tutti i LED</span></span></button>
+<header>
+  <div><div class="brand">IDEFIX <span>/ ObelICS</span></div><h1 id="page-title">Controllo LED</h1></div>
+  <nav aria-label="Schermate" role="tablist">
+    <button id="tab-led" role="tab" aria-selected="true" aria-controls="led-panel" type="button">LED</button>
+    <button id="tab-signal" role="tab" aria-selected="false" aria-controls="signal-panel" type="button">Segnale LoRa</button>
+  </nav>
+</header>
+<div id="demo-banner" class="demo-banner" hidden>ANTEPRIMA · dati simulati · nessun comando hardware</div>
+<section id="led-panel" role="tabpanel" aria-labelledby="tab-led">
+  <p class="hint">Scegli un effetto e osserva ObelICS.</p>
+  <div class="led-controls">
+    <button class="mode" data-mode="bounce" aria-pressed="false" type="button"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 32h44M19 23l-9 9 9 9M45 23l9 9-9 9"/><circle cx="32" cy="32" r="7" fill="currentColor" stroke="none"/></svg><span class="name">Bounce<span class="description">Luce avanti e indietro</span></span></button>
+    <button class="mode" data-mode="spin" aria-pressed="false" type="button"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M48 20a21 21 0 1 0 5 22M48 9v13H35"/><circle cx="32" cy="32" r="4" fill="currentColor" stroke="none"/></svg><span class="name">Spin<span class="description">Luce in rotazione</span></span></button>
+    <button class="mode" data-mode="blink" aria-pressed="false" type="button"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="10"/><path d="M32 5v9M32 50v9M5 32h9M50 32h9M13 13l6 6M45 45l6 6M13 51l6-6M45 19l6-6"/></svg><span class="name">Blink<span class="description">Lampeggio dei LED</span></span></button>
+    <button class="mode" data-mode="off" aria-pressed="false" type="button"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6v24M20 15a22 22 0 1 0 24 0"/></svg><span class="name">Spegni<span class="description">Spegni tutti i LED</span></span></button>
+  </div>
+  <div class="feedback" id="feedback" data-state="idle" role="status" aria-live="polite"><strong id="led-message">Pronto per il primo comando.</strong><span id="led-explanation">La conferma arriverà da ObelICS.</span></div>
+  <div class="led-footer"><span id="target">ObelICS · Ethernet</span><span id="last-ack">Nessun comando confermato</span></div>
+  <details id="details" hidden><summary>Dettagli del comando</summary><pre id="log"></pre></details>
 </section>
-<section class="feedback" id="feedback" data-state="idle" role="status" aria-live="polite"><span class="status-icon" id="status-icon" aria-hidden="true">→</span><div><strong id="message">Pronto per il primo comando.</strong><p id="explanation">Tocca un effetto. La conferma arriverà da ObelICS.</p></div></section>
-<footer><span id="target">Destinazione in caricamento…</span><span id="last">Nessun comando confermato in questa sessione</span></footer>
-<details id="details" hidden><summary>Dettagli del comando</summary><pre id="log"></pre></details>
+<section id="signal-panel" role="tabpanel" aria-labelledby="tab-signal" hidden>
+  <div class="signal-top"><span>WL55 → ObelICS <span class="subtle">· PONG ricevuto</span></span><span id="link-status" role="status" aria-live="polite">In attesa di telemetria</span></div>
+  <div class="metrics">
+    <div class="metric"><span class="metric-label">Potenza ricevuta · RSSI</span><div><strong id="rssi">—</strong><span class="unit">dBm</span></div></div>
+    <div class="metric"><span class="metric-label">Segnale / rumore · SNR</span><div><strong id="snr">—</strong><span class="unit">dB</span></div></div>
+    <div class="metric replies"><span class="metric-label">Risposte / PING</span><div><strong id="replies">— / —</strong><span id="success-rate" class="unit">—</span></div><span class="counter-origin">Dall’avvio di ObelICS</span></div>
+  </div>
+  <div class="plots">
+    <div class="plot"><div class="plot-title"><span><i class="line-key rssi-key"></i>RSSI · dBm</span><span class="subtle">Potenza ricevuta</span></div><svg id="rssi-chart" role="img" aria-label="Grafico RSSI in dBm nel tempo"></svg></div>
+    <div class="plot"><div class="plot-title"><span><i class="line-key snr-key"></i>SNR · dB</span><span class="subtle">Segnale / rumore</span></div><svg id="snr-chart" role="img" aria-label="Grafico SNR in dB nel tempo"></svg></div>
+  </div>
+  <div class="signal-bottom"><span id="last-signal">Nessun PONG ricevuto</span><span id="extra-stats">Timeout — · RTT —</span></div>
+  <div class="experiment"><div><strong id="experiment-state">Pronto per una prova</strong><span id="experiment-hint">Avvia la raccolta, poi sposta la WL55.</span></div><button id="experiment-button" class="primary" type="button">Avvia prova</button></div>
+  <div id="signal-error" role="alert" hidden></div>
+  <div id="demo-controls" class="demo-controls" hidden><label for="scenario">Scenario simulato</label><select id="scenario"><option value="near">Vicino</option><option value="far">Più lontano</option><option value="obstacle">Dietro un ostacolo</option><option value="off">WL55 spenta</option></select></div>
+</section>
 </main>
-<script>
-const buttons = [...document.querySelectorAll('[data-mode]')];
-const token = document.querySelector('meta[name="idefix-token"]').content;
-const message = document.getElementById('message');
-const explanation = document.getElementById('explanation');
-let pending = false;
-function feedback(state, title, description) {
-  document.getElementById('feedback').dataset.state = state;
-  document.getElementById('status-icon').textContent = {idle:'→',pending:'…',success:'✓',error:'!'}[state];
-  message.textContent = title;
-  explanation.textContent = description;
-}
-function select(mode) {
-  buttons.forEach(button => {const active = button.dataset.mode === mode;button.classList.toggle('selected', active);button.setAttribute('aria-pressed', String(active));});
-}
-async function send(mode) {
-  if (pending) return;
-  pending = true;
-  buttons.forEach(button => button.disabled = true);
-  select(null);
-  document.getElementById('details').hidden = true;
-  feedback('pending', 'Invio in corso…', 'Attendo la conferma da ObelICS.');
-  const abort = new AbortController();
-  const timer = setTimeout(() => abort.abort(), 45000);
-  try {
-    const response = await fetch('/api/led', {method:'POST',headers:{'Content-Type':'application/json','X-Idefix-Token':token},body:JSON.stringify({mode}),signal:abort.signal});
-    const result = await response.json();
-    if (response.ok && result.ok) {
-      select(mode);
-      feedback('success', result.message, 'ACK ricevuto');
-      document.getElementById('last').textContent = 'Ultimo ACK · ' + new Date().toLocaleTimeString('it-IT', {timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    } else {
-      feedback('error', result.message || 'Invio non riuscito.', 'Lo stato fisico dei LED non è confermato.');
-    }
-    if (result.detail) {document.getElementById('log').textContent = result.detail;document.getElementById('details').hidden = false;}
-  } catch(error) {
-    feedback('error', 'Collegamento con Idefix interrotto.', 'Esito non confermato. Ricarica la pagina quando il servizio è disponibile.');
-  } finally {
-    clearTimeout(timer);
-    pending = false;
-    buttons.forEach(button => button.disabled = false);
-  }
-}
-buttons.forEach(button => button.addEventListener('click', () => send(button.dataset.mode)));
-fetch('/api/info').then(response => {if(!response.ok)throw new Error();return response.json();}).then(info => {document.getElementById('target').textContent = 'ObelICS · ' + info.target;}).catch(() => {document.getElementById('target').textContent = 'Servizio Idefix non raggiungibile';feedback('error', 'Servizio non raggiungibile.', 'Verifica che il pannello Python sia in esecuzione.');});
-</script>
+<script src="/static/panel.js"></script>
 </body>
 </html>

@@ -41,7 +41,7 @@ if systemctl is-active --quiet display-manager.service; then
     echo 'È già attivo un display manager. Non installo una seconda sessione grafica: verificare quello esistente.' >&2
     exit 1
 fi
-for source in idefix_web.py idefix_mavlink.py start-kiosk.sh static/index.html; do
+for source in idefix_web.py idefix_link.py idefix_mavlink.py start-kiosk.sh static/index.html static/panel.css static/panel.js; do
     runuser -u pi -- test -r "$APP_DIR/$source" || {
         echo "File mancante o non leggibile dall’utente pi: $APP_DIR/$source" >&2
         exit 1
